@@ -3,6 +3,7 @@ use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
 use std::time::{Duration, Instant};
+use futures::future::BoxFuture;
 
 use futures::task;
 
@@ -25,6 +26,8 @@ struct MiniTokio {
 }
 
 type Task = Pin<Box<dyn Future<Output=()> + Send>>;
+// NOTE: or typically written as:
+// type Task = BoxFuture<'static, ()>;
 
 impl MiniTokio {
     fn new() -> MiniTokio {
